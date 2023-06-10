@@ -1,0 +1,50 @@
+.videoPlayer {
+  position: relative;
+  width: 100%;
+  height: 765px;
+
+  .poster {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .playIcon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 61px;
+      cursor: pointer;
+    }
+  }
+
+  .hide {
+    visibility: hidden;
+  }
+
+  .show {
+    visibility: visible;
+    animation: 1.8s linear 0s show;
+  }
+
+  .frame {
+    position: absolute;
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}

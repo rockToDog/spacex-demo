@@ -42,6 +42,7 @@ const Home: React.FC = () => {
   });
 
   const loadMoreData = async () => {
+    // for test
     await timeout(3000);
     const { query, options } = queryParams;
     let nextPage = 2;

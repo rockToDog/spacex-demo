@@ -38,7 +38,7 @@ const darkTheme = createTheme({
         },
       },
       defaultProps: {
-        disableRipple: true, // No more ripple, on the whole application 💣!
+        disableRipple: true,
       },
     },
   },

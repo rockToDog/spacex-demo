@@ -3,7 +3,7 @@ import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import styles from "./index.module.less";
 
 const VideoPlayer: React.FC<{
-  id: string;
+  id: string | undefined;
   url: string | undefined;
   poster: string | undefined;
 }> = ({ id, url, poster }) => {

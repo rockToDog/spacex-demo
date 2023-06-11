@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { baseUrl } from "../constants/index";
-import { LaunchInfo, RequestConfig } from "../types";
+import { baseUrl } from "@/constants/index";
+import { LaunchInfo, RequestConfig } from "@/types";
 
 export const formatQueryStr = (
   query: Record<string, string | number>
@@ -64,9 +64,7 @@ export const request = async <T>({
 
 export const useRequest = <T>(requestConfig: RequestConfig) => {
   const [data, setData] = useState<T>();
-  const [mergedData, setMergedData] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
-  const { merge } = requestConfig?.config ?? {};
 
   const fetchData = async (params: RequestConfig) => {
     setLoading(true);
@@ -75,26 +73,41 @@ export const useRequest = <T>(requestConfig: RequestConfig) => {
     setLoading(false);
   };
 
-  const mergeData = async (params: RequestConfig) => {
+  useEffect(() => {
+    fetchData(requestConfig);
+  }, []);
+
+  return {
+    data: data,
+    run: fetchData,
+    loading,
+  };
+};
+
+export const useRequestList = <T>(requestConfig: RequestConfig) => {
+  const [data, setData] = useState<T[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchData = async (params: RequestConfig) => {
     setLoading(true);
     const res = await request<T>(params ?? requestConfig);
     if (res) {
       if (params?.config?.refresh) {
-        setMergedData([res]);
+        setData([res]);
       } else {
-        setMergedData(mergedData.length ? [...mergedData, res] : [res]);
+        setData(data.length ? [...data, res] : [res]);
       }
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    merge ? mergeData(requestConfig) : fetchData(requestConfig);
+    fetchData(requestConfig);
   }, []);
 
   return {
-    data: merge ? mergedData : data,
-    run: merge ? mergeData : fetchData,
+    data: data,
+    run: fetchData,
     loading,
   };
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { mergeClassNames } from "../../utils";
+import { mergeClassNames } from "@/utils";
 import styles from "./index.module.less";
 import {
   Card,
@@ -9,7 +9,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { CloseOutlined } from "@mui/icons-material";
-import placeholderImg from "../../assets/placeholder_1600x1600.svg";
+import placeholderImg from "@/assets/placeholder_1600x1600.svg";
 
 const Image: React.FC<
   {

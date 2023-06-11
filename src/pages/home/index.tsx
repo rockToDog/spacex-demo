@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-import { timeout, useRequest, useScrollBottom } from "../../utils";
-import api from "../../api";
+import { timeout, useRequestList, useScrollBottom } from "@/utils";
+import api from "@/api";
 import VideoCard from "./components/VideoCard";
 import {
   LaunchInfo,
   Options,
-  Pagination,
   Query,
   QueryParams,
-} from "../../types";
-import PageContainer from "../../components/PageContainer";
+  QueryResponse,
+} from "@/types";
+import PageContainer from "@/components/PageContainer";
 import {
   AppBar,
   Box,
@@ -33,15 +33,10 @@ const Home: React.FC = () => {
   });
   const queryParams = queryParamsRef.current;
 
-  const { data, run, loading } = useRequest<
-    { docs: LaunchInfo[] } & Pagination
-  >({
+  const { data, run, loading } = useRequestList<QueryResponse>({
     url: api.query,
     data: {
       options: queryParams.options,
-    },
-    config: {
-      merge: true,
     },
   });
 
@@ -115,10 +110,13 @@ const Home: React.FC = () => {
     });
   };
 
-  const docs = data?.reduce((pre, cur) => [...pre, ...cur.docs], []);
+  const launchList: LaunchInfo[] = data?.reduce(
+    (pre, cur) => [...pre, ...cur.docs],
+    []
+  );
 
   const isHideLoading =
-    loading || !docs?.length || !data?.[data?.length - 1]?.hasNextPage;
+    loading || !launchList?.length || !data?.[data?.length - 1]?.hasNextPage;
 
   return (
     <PageContainer showHeader={false}>
@@ -141,7 +139,7 @@ const Home: React.FC = () => {
         </Toolbar>
       </AppBar>
       <Grid container spacing={{ xs: 6, md: 6 }} columns={{ xs: 2, md: 2 }}>
-        {docs?.map((i, index) => (
+        {launchList?.map((i, index) => (
           <Grid item xs={42} sm={1} md={1} key={index}>
             <VideoCard data={i} />
           </Grid>
@@ -157,7 +155,7 @@ const Home: React.FC = () => {
       >
         <CircularProgress />
       </Box>
-      {docs?.length && (
+      {launchList?.length && (
         <Fab
           onClick={handleScrollTop}
           sx={{ position: "fixed", opacity: 0.6, bottom: 60, right: 30 }}

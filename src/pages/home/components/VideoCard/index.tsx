@@ -2,9 +2,9 @@ import React from "react";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import styles from "./index.module.less";
-import { LaunchInfo } from "../../../../types";
-import { getImgUrl, mergeClassNames } from "../../../../utils";
-import Image from "../../../../components/Image";
+import { LaunchInfo } from "@/types";
+import { getImgUrl, mergeClassNames } from "@/utils";
+import Image from "@/components/Image";
 
 export interface Props {
   data: LaunchInfo;

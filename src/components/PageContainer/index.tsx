@@ -3,7 +3,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link } from "react-router-dom";
 
 const PageContainer: React.FC<{
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode;
   title?: string;
   back?: string;
   showHeader?: boolean;
@@ -11,7 +11,7 @@ const PageContainer: React.FC<{
   return (
     <div
       style={{
-        // padding: "20px 20px",
+        padding: "0px 20px",
         width: "100%",
         margin: "0 auto",
         maxWidth: "1400px",

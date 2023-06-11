@@ -10,10 +10,10 @@ import {
   SxProps,
   Box,
 } from "@mui/material";
-import DateRangePicker from "../../../../components/DateRangePicker";
+import DateRangePicker from "@/components/DateRangePicker";
 import { Controller, useForm } from "react-hook-form";
 import { Dayjs } from "dayjs";
-import { SortType } from "../../../../types";
+import { SortType } from "@/types";
 
 export type FormData = {
   date_utc?: [Dayjs | null, Dayjs | null];

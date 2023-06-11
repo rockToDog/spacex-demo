@@ -64,16 +64,29 @@ export interface Reddit {
   recovery: null;
 }
 
-export interface Pagination{
-  hasNextPage: boolean // This is a name key
-  hasPrevPage: boolean
-  limit: number
-  nextPage: number
-  offset: number
-  page: number
-  pagingCounter: number
-  prevPage: null
-  totalDocs: number
-  totalPages: number
+export interface Pagination {
+  hasNextPage: boolean; // This is a name key
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: number;
+  offset: number;
+  page: number;
+  pagingCounter: number;
+  prevPage: null;
+  totalDocs: number;
+  totalPages: number;
 }
 
+export interface QueryResponse {
+  docs: LaunchInfo;
+  hasNextPage: boolean; // This is a name key
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: number;
+  offset: number;
+  page: number;
+  pagingCounter: number;
+  prevPage: null;
+  totalDocs: number;
+  totalPages: number;
+}

@@ -13,6 +13,7 @@ import {
 import DateRangePicker from "@/components/DateRangePicker";
 import { Controller, useForm } from "react-hook-form";
 import { Dayjs } from "dayjs";
+import message from "@/utils/message";
 import { SortType } from "@/types";
 
 export type FormData = {
@@ -36,6 +37,13 @@ const SearchForm: React.FC<{
   });
 
   const onSubmit = handleSubmit((values) => {
+    const { date_utc } = values;
+    const nullDateLength = date_utc?.filter((i) => !i)?.length;
+    if (date_utc?.length && nullDateLength === 1) {
+      message.warning("must select start and end date");
+      return;
+    }
+
     onOk && onOk(values);
   });
 

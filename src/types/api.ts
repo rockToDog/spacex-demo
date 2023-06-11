@@ -78,7 +78,7 @@ export interface Pagination {
 }
 
 export interface QueryResponse {
-  docs: LaunchInfo;
+  docs: LaunchInfo[];
   hasNextPage: boolean; // This is a name key
   hasPrevPage: boolean;
   limit: number;

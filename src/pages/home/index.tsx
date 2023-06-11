@@ -21,6 +21,7 @@ import {
 import SearchForm, { FormData } from "./components/SearchForm/SearchForm";
 import QueryModal from "./components/SearchForm/QueryModal";
 import { ArrowUpwardOutlined } from "@mui/icons-material";
+import Empty from "@/components/Empty";
 
 const Home: React.FC = () => {
   const loadingRef = useRef(null);
@@ -110,7 +111,7 @@ const Home: React.FC = () => {
     });
   };
 
-  const launchList: LaunchInfo[] = data?.reduce(
+  const launchList = data?.reduce<LaunchInfo[]>(
     (pre, cur) => [...pre, ...cur.docs],
     []
   );
@@ -163,6 +164,7 @@ const Home: React.FC = () => {
           <ArrowUpwardOutlined />
         </Fab>
       )}
+      {!launchList?.length && !loading && <Empty />}
     </PageContainer>
   );
 };
